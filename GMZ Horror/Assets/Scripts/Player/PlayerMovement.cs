@@ -5,31 +5,48 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
      private CharacterController controller;
-     public float speed = 5f, sprintSpeed = 7f;
+     public float speed = 5f;
      public float turnSpeed = 180f;
+     public Animator animator;
+     float movement, rotation;
 
     void Start()
     {
-
+        animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        Vector3 movDir; 
+       Vector3 movDir;
 
-        transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
-        movDir = transform.forward * Input.GetAxis("Vertical") * speed;
-        
-        controller.Move(movDir * Time.deltaTime - Vector3.up * 0.5f);
+       transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
+       movDir = transform.forward * Input.GetAxis("Vertical") * speed;
 
-        if (Input.GetKey(KeyCode.LeftShift))
+       controller.Move(movDir * Time.deltaTime - Vector3.up * 0.5f);
+
+        movement = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        rotation = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
+    }
+
+    private void LateUpdate()
+    {
+
+        if (movement == 0)
         {
-            speed = sprintSpeed;
+            animator.SetBool("isWalking", false);
+            if (rotation > 0 || rotation < 0)
+            {
+                animator.SetBool("isWalking", true);
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+            }
         }
         else
-        {
-            speed = 5f;
+        {        
+                animator.SetBool("isWalking", true);
         }
     }
 }

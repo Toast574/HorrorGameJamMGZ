@@ -5,38 +5,23 @@ using UnityEngine;
 public class DoorInteract : MonoBehaviour
 {
     [SerializeField] private Animator doorAnim;
-    [SerializeField] private GameObject Interacttext;
+    public Transform player, targetpos;
 
-
-    private void Start()
+    void teleport()
     {
-        NotLookingAtDoor();
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        LookingAtDoor();
+        doorAnim.SetTrigger("open"); 
+        player.position = targetpos.position;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKey(KeyCode.E))
+        if (other.CompareTag("Player"))
         {
-            doorAnim.SetTrigger("Open");
+            if (Input.GetKey(KeyCode.E))
+            {
+                player.position = targetpos.position;
+                teleport();
+            }
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        NotLookingAtDoor();
-    }
-
-    void LookingAtDoor()
-    {
-        Interacttext.SetActive(true);
-    }
-
-    void NotLookingAtDoor()
-    {
-        Interacttext.SetActive(false);
     }
 }

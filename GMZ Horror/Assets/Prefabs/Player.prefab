@@ -189,6 +189,7 @@ MonoBehaviour:
   speed: 5
   sprintSpeed: 7
   turnSpeed: 180
+  animator: {fileID: 0}
 --- !u!143 &2751986756529610777
 CharacterController:
   m_ObjectHideFlags: 0
