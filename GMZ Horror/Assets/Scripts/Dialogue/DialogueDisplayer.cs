@@ -32,24 +32,21 @@ public class DialogueDisplayer : MonoBehaviour
         {
             StopCoroutine(typingCoroutine); // Stop previous typing coroutine if any
             typingCoroutine = null;
+            Debug.Log("typingStopped");
         }
 
         if (currentLineIndex < currentDialogue.dialogueLines.Length)
         {
-            StartCoroutine(StartTypingWithDelay());
+            string lineToDisplay = currentDialogue.dialogueLines[currentLineIndex].line;
+            typingCoroutine = StartCoroutine(TypeLine(lineToDisplay));
+            currentLineIndex++;
+            Debug.Log("StartedTyping");
         }
         else
         {
             EndDialogue();
+            Debug.Log("Dended");
         }
-    }
-    private IEnumerator StartTypingWithDelay()
-    {
-        yield return null; // Wait for one frame
-
-        string lineToDisplay = currentDialogue.dialogueLines[currentLineIndex].line;
-        typingCoroutine = StartCoroutine(TypeLine(lineToDisplay));
-        currentLineIndex++;
     }
         // Coroutine to display text character by character
         private IEnumerator TypeLine(string line)

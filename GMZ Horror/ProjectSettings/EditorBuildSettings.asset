@@ -4,6 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartingCutscene.unity
+    guid: 2ebb31fb88ddde24293653bc769a1321
+  - enabled: 1
+    path: Assets/Scenes/MasonMap.unity
+    guid: f4dd20dac4fe7f44cb1e5fb79b70beb9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 953d9a0043542f2478f9393c479f03da, type: 2}
