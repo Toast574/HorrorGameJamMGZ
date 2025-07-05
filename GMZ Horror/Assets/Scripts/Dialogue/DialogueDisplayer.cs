@@ -1,6 +1,9 @@
-using UnityEngine;
 using System.Collections;
-using TMPro; // Use TextMeshPro for better text rendering
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem;
 
 public class DialogueDisplayer : MonoBehaviour
 {
@@ -11,10 +14,10 @@ public class DialogueDisplayer : MonoBehaviour
     private DialogueData currentDialogue;
     private int currentLineIndex;
     private Coroutine typingCoroutine;
-
     // Call this function to start a dialogue
     public void StartDialogue(DialogueData dialogue)
     {
+        Interactable[] interactables = FindObjectsOfType<Interactable>();
         currentDialogue = dialogue;
         currentLineIndex = 0;
         dialogueBox.SetActive(true);
@@ -28,25 +31,28 @@ public class DialogueDisplayer : MonoBehaviour
         if (typingCoroutine != null)
         {
             StopCoroutine(typingCoroutine); // Stop previous typing coroutine if any
-            Debug.Log("First");
+            typingCoroutine = null;
         }
 
         if (currentLineIndex < currentDialogue.dialogueLines.Length)
         {
-            string lineToDisplay = currentDialogue.dialogueLines[currentLineIndex].line;
-            typingCoroutine = StartCoroutine(TypeLine(lineToDisplay));
-            currentLineIndex++;
-            Debug.Log("Second");
+            StartCoroutine(StartTypingWithDelay());
         }
         else
         {
             EndDialogue();
-            Debug.Log("Third");
         }
     }
+    private IEnumerator StartTypingWithDelay()
+    {
+        yield return null; // Wait for one frame
 
-    // Coroutine to display text character by character
-    private IEnumerator TypeLine(string line)
+        string lineToDisplay = currentDialogue.dialogueLines[currentLineIndex].line;
+        typingCoroutine = StartCoroutine(TypeLine(lineToDisplay));
+        currentLineIndex++;
+    }
+        // Coroutine to display text character by character
+        private IEnumerator TypeLine(string line)
     {
         dialogueText.text = ""; // Clear the text field initially
         foreach (char letter in line.ToCharArray())
@@ -54,13 +60,26 @@ public class DialogueDisplayer : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+        typingCoroutine = null;
     }
 
     // Call this function to end the dialogue
-    private void EndDialogue()
+    public void EndDialogue()
     {
         dialogueBox.SetActive(false);
         // Add any other logic here, like resuming gameplay
+        StartCoroutine(waitalittle());
+        
+    }
+
+    IEnumerator waitalittle()
+    {
+        yield return new WaitForSeconds(1f);
+        Interactable[] interactables = FindObjectsOfType<Interactable>();
+        foreach (Interactable interactable in interactables)
+        {
+            interactable.CanInteract();
+        }
     }
 
     // Optional: Add a function to allow skipping the typing animation
@@ -69,30 +88,27 @@ public class DialogueDisplayer : MonoBehaviour
         if (typingCoroutine != null)
         {
             StopCoroutine(typingCoroutine);
-            typingCoroutine = null;
         }
+        typingCoroutine = null;
         dialogueText.text = currentDialogue.dialogueLines[currentLineIndex - 1].line; // Display the full line
     }
 
-    // Optional: Handle player input to advance dialogue
-    private void Update()
+
+    private void OnButtonRegular()
     {
-        if (dialogueBox.activeSelf && Input.GetMouseButtonDown(0)) // Example: advance on mouse click
+        if (dialogueBox.activeSelf) // Example: advance on mouse click
         {
-            Debug.Log("Click Detected");
             // Check if the typing coroutine is currently active
             if (typingCoroutine != null)
             {
                 // If the coroutine is still running, skip the typing animation
                 SkipTyping();
-                Debug.Log("Skipped typing");
             }
             else
             {
                 // If the coroutine is NOT running (meaning the typewriter effect has finished),
                 // display the next line of dialogue
                 DisplayNextLine();
-                Debug.Log("Displaying Next line called");
             }
         }
     }

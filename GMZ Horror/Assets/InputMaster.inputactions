@@ -1,0 +1,45 @@
+{
+    "name": "InputMaster",
+    "maps": [
+        {
+            "name": "Interact",
+            "id": "f41de409-655c-403e-ac63-0aca0f94f960",
+            "actions": [
+                {
+                    "name": "ButtonRegular",
+                    "type": "Button",
+                    "id": "7e994a99-a33c-4c93-91ed-2e9821d5ada9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c8e3efe9-3a56-4335-b4fe-d6a56db746fb",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonRegular",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7fc6a87e-9b2f-4f55-9db1-a86694a6dc70",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonRegular",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
