@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class Interactable : MonoBehaviour
+public class Door : MonoBehaviour
 {
-    public DialogueDisplayer dDesplayerScript;
-    public DialogueData dData;
-    private bool isInteractable = false, parentIsInteractable = true;
+    [SerializeField] private bool isInteractable = false, parentIsInteractable = true;
+    [SerializeField] private string sceneName;
+    public Animator fadeAnim;
 
     private void Start()
     {
@@ -39,10 +40,12 @@ public class Interactable : MonoBehaviour
 
     public void OnButtonRegular()
     {
+        Debug.Log("ButtonPressed");
         if (isInteractable == true && parentIsInteractable == true)
         {
+            Debug.Log("LoadScene");
             CantInteract();
-            dDesplayerScript.StartDialogue(dData);
+            StartCoroutine(loadsceney());
         }
     }
 
@@ -51,5 +54,11 @@ public class Interactable : MonoBehaviour
         CantInteract();
         yield return new WaitForSeconds(1.3f);
         CanInteract();
+    }
+    IEnumerator loadsceney()
+    {
+        fadeAnim.SetTrigger("fadeout");
+        yield return new WaitForSeconds(1.3f);
+        SceneManager.LoadScene(sceneName);
     }
 }

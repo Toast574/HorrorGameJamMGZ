@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MasonMap.unity
     guid: f4dd20dac4fe7f44cb1e5fb79b70beb9
+  - enabled: 1
+    path: Assets/Scenes/Door Scene.unity
+    guid: 367b4a471120bad4aa9aa2d4fe7e9f0e
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 953d9a0043542f2478f9393c479f03da, type: 2}

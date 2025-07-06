@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: -4016221617123975181, guid: 0dc3edb595eea404599a559ea976dba1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6b08ca5d6106a024eb070f19cd749ab5, type: 2}
     - target: {fileID: 919132149155446097, guid: 0dc3edb595eea404599a559ea976dba1, type: 3}
       propertyPath: m_Name
       value: Player 1
@@ -135,7 +139,6 @@ MonoBehaviour:
   speed: 5
   turnSpeed: 180
   animator: {fileID: 2803601856106911037}
-  interactable: {fileID: 0}
 --- !u!143 &3969522684123286144
 CharacterController:
   m_ObjectHideFlags: 0
