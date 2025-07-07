@@ -37,6 +37,17 @@
                     "action": "ButtonRegular",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f1ddfc2-b189-45e1-a00d-69f6f0103cfd",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ButtonRegular",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
