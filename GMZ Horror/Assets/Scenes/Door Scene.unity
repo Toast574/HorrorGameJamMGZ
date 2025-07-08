@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimelineLength: 4.38
-  SceneName: MasonMap
+  SceneName: MasonMap2
 --- !u!4 &982376711
 Transform:
   m_ObjectHideFlags: 0
